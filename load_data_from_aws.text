@@ -1,0 +1,35 @@
+// Create table
+CREATE OR REPLACE TABLE OUR_FIRST_DB.PUBLIC.movive_titels
+(
+    show_id string,
+    type string,
+    title string,
+    director string,
+    cast string,
+    contry string,
+    date_added string,
+    release_year string,
+    rating string,
+    duration string,
+    listed_in string,
+    description string
+);
+
+// Create file format
+CREATE OR REPLACE FILE FORMAT OUR_FIRST_DB.PUBLIC.csv_file_format
+    TYPE = CSV
+    FIELD_DELIMITER = ','
+    SKIP_HEADER = 1
+    NULL_IF = ( 'NULL', 'null' )
+    EMPTY_FIELD_AS_NULL = TRUE
+    FIELD_OPTIONALLY_ENCLOSED_BY = '"';
+    
+// Create stage
+CREATE OR REPLACE STAGE OUR_FIRST_DB.PUBLIC.csv_folder
+    URL = 's3://snowflakes3bucket123/csv/'
+    STORAGE_INTEGRATION = s3_int
+    FILE_FORMAT = OUR_FIRST_DB.PUBLIC.csv_file_format;
+    
+// Copy data
+COPY INTO OUR_FIRST_DB.PUBLIC.movive_titels
+FROM @OUR_FIRST_DB.PUBLIC.csv_folder;

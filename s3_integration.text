@@ -1,0 +1,11 @@
+// Create storage integration
+CREATE OR REPLACE STORAGE INTEGRATION s3_int
+TYPE = EXTERNAL_STAGE
+STORAGE_PROVIDER = S3
+ENABLED = TRUE
+STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::055454134849:role/snowflake-access-role'
+STORAGE_ALLOWED_LOCATIONS = ( 's3://snowflakes3bucket123/csv/' , 's3://snowflakes3bucket123/json/' )
+COMMENT = 'S3 integration';
+
+DESC INTEGRATION s3_int;
+

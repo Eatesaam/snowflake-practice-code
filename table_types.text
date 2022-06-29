@@ -1,0 +1,29 @@
+// Create database
+CREATE DATABASE TABLES_DB;
+
+// Create permanent table
+CREATE OR REPLACE TABLE TABLES_DB.PUBLIC.customers
+(
+    id int,
+    first_name string,
+    last_name string
+);
+
+// Create transient table
+CREATE OR REPLACE TRANSIENT TABLE TABLES_DB.PUBLIC.customers_trans
+(
+    id int,
+    first_name string,
+    last_name string
+);
+
+// Create temporary table
+CREATE OR REPLACE TEMPORARY TABLE TABLES_DB.PUBLIC.customers_temp
+(
+    id int,
+    first_name string,
+    last_name string
+);
+
+// Show tables
+SHOW TABLES;
